@@ -15,43 +15,49 @@ hxlExplorer.load = function (url, nodeId) {
 
 hxlExplorer.views.cards = function (hxlData) {
 
-    function formatIndicators(hxlData) {
-        var indicatorsNode = $('<ol class="carousel-indicators">');
-        for (var i = 0; i < hxlData.rows.length; i++) {
-            var indicatorNode = $('<li data-target="#hxl-cards">').attr('data-slide-to', i);
-            if (i == 0) {
-                indicatorNode = indicatorNode.addClass('active');
-            }
-            indicatorsNode.append(indicatorNode);
-        }
-        console.log("Done indicators");
-        return indicatorsNode;
+    var sectionNode = $('<section id="card-view">')
+    var cardsNode = $('<div id="hxl-cards" class="hxl-cards carousel slide">');
+    var innerNode = $('<div class="carousel-inner" role="listbox">');
+    var isFirst = true;
+
+    function updateHeader() {
+        var index = $(innerNode).find('.active').index();
+        $(sectionNode).find('h2').text('Record ' + (index + 1) + " of " + hxlData.rows.length);
     }
 
-    function formatCard(hxlData, row) {
-        var cardNode = $('<dl class="hxl-card dl-horizontal item">');
+    function formatCard(row) {
+        var cardNode = $('<table class="table hxl-card item">');
         for (var i = 0; i < hxlData.columns.length && i < row.values.length; i++) {
-            cardNode.append($('<dt>').text(hxlData.columns[i].header || hxlData.columns[i].displayTag));
-            cardNode.append($('<dd>').text(row.values[i]));
+            var tableRowNode = $('<tr>');
+            tableRowNode.append($('<th>').text(hxlData.columns[i].header || hxlData.columns[i].displayTag));
+            tableRowNode.append($('<td>').text(row.values[i]));
+            cardNode.append(tableRowNode);
         }
         return cardNode;
     }
 
-    var cardsNode = $('<div id="hxl-cards" class="hxl-cards carousel slide">');
-    var innerNode = $('<div class="carousel-inner" role="listbox">');
-    var isFirst = true;
     hxlData.forEach(function (row) {
-        var cardNode = formatCard(hxlData, row);
+        var cardNode = formatCard(row);
         if (isFirst) {
             isFirst = false;
             cardNode.addClass('active');
         }
         innerNode.append(cardNode);
     });
-    //cardsNode.append(formatIndicators(hxlData));
     cardsNode.append(innerNode);
+
+    // blech! fixme
     cardsNode.append($('<a class="left carousel-control" href="#hxl-cards" role="button" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="right carousel-control" href="#hxl-cards" role="button" data-slide="next"> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>'));
-    return cardsNode;
+
+    // example for detecting slide changes
+    $(cardsNode).on('slid.bs.carousel', function () {
+        updateHeader();
+    });
+
+    sectionNode.append($('<h2>'));
+    sectionNode.append(cardsNode);
+    updateHeader();
+    return sectionNode;
 }
 
 hxlExplorer.views.table = function (hxlData) {

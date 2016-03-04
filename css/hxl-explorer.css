@@ -1,0 +1,14 @@
+table.hxl-card {
+    table-layout: fixed;
+    width: 100%;
+}
+
+table.hxl-card th {
+    text-align: right;
+    font-size: 83.333333%;
+    width: 38.2%;
+}
+
+table.hxl-card td {
+    width: 61.8%;
+}
