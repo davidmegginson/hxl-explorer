@@ -12,3 +12,7 @@ table.hxl-card th {
 table.hxl-card td {
     width: 61.8%;
 }
+
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}

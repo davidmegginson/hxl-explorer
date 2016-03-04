@@ -54,6 +54,14 @@ hxlExplorer.views.cards = function (hxlData) {
         updateHeader();
     });
 
+    $(cardsNode).on('swipeleft', function () {
+        $(this).carousel('next');
+    });
+
+    $(cardsNode).on('swiperight', function () {
+        $(this).carousel('prev');
+    });
+
     sectionNode.append($('<h2>'));
     sectionNode.append(cardsNode);
     updateHeader();
