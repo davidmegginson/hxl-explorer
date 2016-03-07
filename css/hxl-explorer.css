@@ -3,16 +3,26 @@ table.hxl-card {
     width: 100%;
 }
 
-table.hxl-card th {
+table.hxl-card th.header {
     text-align: right;
     font-size: 83.333333%;
-    width: 38.2%;
+}
+
+table.hxl-card th.hashtag {
+    text-align: left;
+    font-size: 83.333333%;
+    color: #888888;
+    font-weight: normal;
 }
 
 table.hxl-card td {
-    width: 61.8%;
 }
 
-.carousel-control.left, .carousel-control.right {
-    background-image: none
+.slider-container {
+    padding: 2ex 0;
+    width: 100%;
+}
+
+.slider.slider-horizontal {
+    margin: 0 1em;
 }

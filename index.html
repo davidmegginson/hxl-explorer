@@ -25,7 +25,22 @@
     </header>
 
     <main class="col-xs-12">
-      <input id="slider" class="hidden"></input>
+      <nav class="slider-container hidden">
+        <button id="card-start" class="btn btn-primary btn-xs slider-button" title="First record">
+          <span class="glyphicon glyphicon-backward"></span>
+        </button>
+        <button id="card-prev" class="btn btn-primary btn-xs slider-button" title="Previous record">
+          <span class="glyphicon glyphicon-triangle-left"></span>
+        </button>
+        <input id="slider"></input>
+        <button id="card-next" class="btn btn-primary btn-xs slider-button" title="Next record">
+          <span class="glyphicon glyphicon-triangle-right"></span>
+        </button>
+        <button id="card-end" class="btn btn-primary btn-xs slider-button" title="last record">
+          <span class="glyphicon glyphicon-forward"></span>
+        </button>
+      </nav>
+      <h2 id="data-title">Loading ...</h2>
       <div id="data"></div>
     </main>
 
