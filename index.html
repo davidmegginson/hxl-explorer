@@ -9,6 +9,7 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/bootstrap-slider.min.css" rel="stylesheet"/>
     <link href="css/hxl-explorer.css" rel="stylesheet"/>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -24,6 +25,7 @@
     </header>
 
     <main class="col-xs-12">
+      <input id="slider" class="hidden"></input>
       <div id="data"></div>
     </main>
 
@@ -32,6 +34,7 @@
     <script src="js/jquery.csv.js"></script>
     <script src="js/hxl.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-slider.min.js"></script>
     <script src="js/hxl-explorer.js"></script>
     <script>
       hxlExplorer.load('https://proxy.hxlstandard.org/data/2Yu_Ws.csv', '#data');

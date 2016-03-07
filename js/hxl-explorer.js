@@ -19,6 +19,24 @@ hxlExplorer.views.cards = function (hxlData) {
     var cardsNode = $('<div id="hxl-cards" class="hxl-cards carousel slide">');
     var innerNode = $('<div class="carousel-inner" role="listbox">');
     var isFirst = true;
+    var slider;
+
+    function setupSlider () {
+        slider = new Slider('#slider', {
+            min: 1,
+            max: hxlData.rows.length - 1,
+            value: 1
+        });
+
+        // Update the carousel
+        $('#slider').on('slideStop', function () {
+            $('#hxl-cards').carousel(slider.getValue()-1);
+        });
+    }
+
+    function getActiveIndex () {
+        return $('.active', $('#hxl-cards')).index();
+    }
 
     function updateHeader() {
         var index = $(innerNode).find('.active').index();
@@ -46,22 +64,22 @@ hxlExplorer.views.cards = function (hxlData) {
     });
     cardsNode.append(innerNode);
 
-    // blech! fixme
-    cardsNode.append($('<a class="left carousel-control" href="#hxl-cards" role="button" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="right carousel-control" href="#hxl-cards" role="button" data-slide="next"> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>'));
-
     // example for detecting slide changes
     $(cardsNode).on('slid.bs.carousel', function () {
         updateHeader();
+        slider.setValue(getActiveIndex() + 1);
     });
 
-    $(cardsNode).on('swipeleft', function () {
+    $(cardsNode).on('swipeleft', function (e) {
         $(this).carousel('next');
     });
 
-    $(cardsNode).on('swiperight', function () {
+    $(cardsNode).on('swiperight', function (e) {
         $(this).carousel('prev');
     });
 
+    setupSlider();
+    
     sectionNode.append($('<h2>'));
     sectionNode.append(cardsNode);
     updateHeader();
