@@ -87,14 +87,37 @@ hxlExplorer.views.cards = function (hxlData) {
         $('#data-title').text('Record ' + slider.getValue() + " of " + hxlData.rows.length);
     }
 
+    function analyse(row, index) {
+        var column = row.columns[index];
+        var value = row.values[index];
+        var counts = hxlData.count(column.displayTag);
+        var asideNode = $('aside');
+
+        console.log(counts);
+        
+        asideNode.empty();
+        asideNode.append($('<h2>').text(column.displayTag));
+        counts.forEach(function(row, index) {
+            asideNode.append($('<p>').text(
+                row.values[0] + ' ' + row.values[1]
+            ));
+        });
+    }
+
     function formatCard(row) {
         var cardNode = $('<table class="table hxl-card item">');
-        for (var i = 0; i < hxlData.columns.length && i < row.values.length; i++) {
-            var tableRowNode = $('<tr>');
-            tableRowNode.append($('<th class="header">').text(hxlData.columns[i].header));
-            tableRowNode.append($('<th class="hashtag">').text(hxlData.columns[i].displayTag));
-            tableRowNode.append($('<td class="value">').text(row.values[i]));
-            cardNode.append(tableRowNode);
+        row.values.forEach(function (value, index) {
+            if (index <= hxlData.columns.length) {
+                var tableRowNode = $('<tr>');
+                tableRowNode.append($('<th class="header">').text(hxlData.columns[index].header).on('click', function () {
+                    analyse(row, index);
+                }));
+                tableRowNode.append($('<th class="hashtag">').text(hxlData.columns[index].displayTag));
+                tableRowNode.append($('<td class="value">').text(value));
+                cardNode.append(tableRowNode);
+            }
+        });
+        for (i = 0; i < hxlData.columns.length && i < row.values.length; i++) {
         }
         return cardNode;
     }

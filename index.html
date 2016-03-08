@@ -22,9 +22,6 @@
   <body class="container-fluid">
     <header class="col-xs-12">
       <h1>HXL Explorer</h1>
-    </header>
-
-    <main class="col-xs-12">
       <form id="data-selection" onsubmit="hxlExplorer.load(this.elements['data-url'].value, '#data'); return false;">
         <div class="form-group">
           <label for="data-url">HXL dataset URL</label>
@@ -43,6 +40,10 @@
           </div>
         </div>
       </form>
+    </header>
+
+    <main class="col-xs-12 col-sm-6 col-md-8">
+
       <section id="data-container">
         <h2 id="data-title"></h2>
         <nav class="slider-container hidden">
@@ -63,6 +64,10 @@
         <div id="data"></div>
       </section>
     </main>
+
+    <aside class="col-xs-12 col-sm-6 col-md-4">
+      <p>Aside</p>
+    </aside>
 
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery.mobile.touch.min.js"></script>
