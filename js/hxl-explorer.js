@@ -9,7 +9,6 @@ hxlExplorer.fromHash = function (nodeId, fieldId) {
         hxlExplorer.params = $.deparam(window.location.hash.substring(1));
         if (hxlExplorer.params.url) {
             if (fieldId) {
-                console.log($(fieldId));
                 $(fieldId).val(hxlExplorer.params.url);
             }
             hxlExplorer.load(hxlExplorer.params.url, nodeId);
@@ -23,7 +22,6 @@ hxlExplorer.load = function (url, nodeId) {
     $.get(url, function (data) {
         var hxlData = hxl.wrap($.csv.toArrays(data));
         $(nodeId).append(hxlExplorer.views.cards(hxlData));
-        console.log(jQuery.param({url: url}));
         window.location.hash = jQuery.param({url: url});
     }).fail(function () {
         alert("Cannot read from " + url);
