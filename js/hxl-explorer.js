@@ -31,7 +31,7 @@ hxlExplorer.load = function (url, nodeId) {
 hxlExplorer.views.cards = function (hxlData) {
 
     var sectionNode = $('<section id="card-view">')
-    var cardsNode = $('<div id="hxl-cards" class="hxl-cards carousel slide">');
+    var cardsNode = $('<div id="hxl-cards" class="hxl-cards carousel slide" data-interval="">');
     var innerNode = $('<div class="carousel-inner" role="listbox">');
     var isFirst = true;
     var slider;
